@@ -1,32 +1,25 @@
 import { v4 as uuidv4 } from "uuid";
 
-import { ADD_USER, HANDLE_FUEL } from './actionTypes';
-
-const initialState = {
-  users: [],
-  walletBalance: 0,
-};
-
-const reducer = (state = initialState, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
-    case ADD_USER:
+    case "add":
       const newUser = {
-        id: uuidv4(),
-        name: action.payload.name,
-      };
-      return {
-        ...state,
-        users: [...state.users, newUser],
-        walletBalance: state.walletBalance + 10,
+        id: uuidv4(), 
+        name: action.name,
       };
 
-    case HANDLE_FUEL:
-      if (state.walletBalance >= 50) {
-        return {
-          ...state,
-          walletBalance: state.walletBalance - 50,
-        };
+      action.setBalance(action.balance + 10);
+
+      return [...state, newUser];
+
+    case "fuel":
+     
+      if (action.balance >= 50) {
+       
+        action.setBalance(action.balance - 50);
       }
+
+    
       return state;
 
     default:
@@ -34,4 +27,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export default reducer;
