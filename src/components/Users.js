@@ -4,7 +4,7 @@ function Users({ users, dispatch, setBalance, balance }) {
     console.log(users);
 
     function handleFuel() {
-        // dispatch({ type: "fuel", setBalance, balance });
+        dispatch({ type: "fuel", setBalance, balance });
     }
     return (
         <div>
